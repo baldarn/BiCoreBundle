@@ -35,25 +35,18 @@ matrix:
           
     allow_failures:
         #Sqlite fails on comparision date (equals)
-        - php: 7.2
-          env: DB=mysql SYMFONY=5.0
-        - php: 7.2
-          env: DB=pgsql SYMFONY=5.0
-        - php: 7.2
-          env: DB=sqlite3 SYMFONY=5.0
-        - php: 7.3
-          env: DB=mysql SYMFONY=5.0
-        - php: 7.3
-          env: DB=pgsql SYMFONY=5.0
-        - php: 7.3
-          env: DB=sqlite3 SYMFONY=5.0
-       # - php: hhvm-3.24
-       # - php: 5.6
-       #   env:
-       # - php: 7.0
-       #   env:
-       # - php: 7.1
-       #   env:
+        #- php: 7.2
+        #  env: DB=mysql SYMFONY=5.0
+        #- php: 7.2
+        #  env: DB=pgsql SYMFONY=5.0
+        #- php: 7.2
+        #  env: DB=sqlite3 SYMFONY=5.0
+        #- php: 7.3
+        #  env: DB=mysql SYMFONY=5.0
+        #- php: 7.3
+        #  env: DB=pgsql SYMFONY=5.0
+        #- php: 7.3
+        #  env: DB=sqlite3 SYMFONY=5.0
     exclude:
     #- php: hhvm
     #  env: DB=pgsql
