@@ -16,8 +16,7 @@ class PermessiEntityTest extends KernelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
-    {
+    protected function setUp(): void {
         self::bootKernel();
         $this->em = static::$kernel->getContainer()
                 ->get('doctrine')
@@ -44,8 +43,7 @@ class PermessiEntityTest extends KernelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function tearDown()
-    {
+    protected function tearDown(): void {
         parent::tearDown();
 
         $this->em->close();

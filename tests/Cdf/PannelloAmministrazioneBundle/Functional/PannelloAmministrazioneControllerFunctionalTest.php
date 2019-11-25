@@ -183,8 +183,7 @@ class PannelloAmministrazioneControllerFunctionalTest extends BiTestAuthorizedCl
     /**
      * {@inheritdoc}
      */
-    public function tearDown()
-    {
+    public function tearDown(): void {
         static::createPantherClient()->quit();
         parent::tearDown();
         cleanFilesystem();

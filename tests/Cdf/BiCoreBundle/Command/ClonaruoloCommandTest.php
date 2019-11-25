@@ -6,20 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ClonaruoloCommandTest extends WebTestCase
-{
+class ClonaruoloCommandTest extends WebTestCase {
 
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
-    {
+    protected function setUp(): void {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
     }
 
-    public function testClonaruolo()
-    {
+    public function testClonaruolo() {
         $kernel = static::$kernel;
         $em = $kernel->getContainer()->get('doctrine')->getManager();
         $application = new Application($kernel);
@@ -48,7 +45,7 @@ class ClonaruoloCommandTest extends WebTestCase
                         ->where("p.ruoli = :ruolo")
                         ->setParameter('ruolo', $ruolonew)
                         ->getQuery()->execute();
-        
+
         $em->remove($ruolonew);
         $em->flush();
     }

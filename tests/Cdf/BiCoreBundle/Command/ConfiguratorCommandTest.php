@@ -6,20 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ConfiguratorCommandTest extends WebTestCase
-{
+class ConfiguratorCommandTest extends WebTestCase {
 
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
-    {
+    protected function setUp(): void {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
     }
 
-    public function testConfigurator()
-    {
+    public function testConfigurator() {
         $em = static::$kernel->getContainer()->get('doctrine')->getManager();
 
         $entity = 'Permessi';
@@ -135,8 +132,8 @@ class ConfiguratorCommandTest extends WebTestCase
         $this->assertContains('cambio valore da NULL a true in formato Boolean', $outputimport2);
         $this->assertContains('cambio valore da NULL a \'admin\'', $outputimport2);
         $this->assertContains('cambio valore da \'provadacancellare\' a NULL', $outputimport2);
-        
-        
+
+
         $em->clear();
 
         $commandTesterImport3 = new CommandTester($commandimport);

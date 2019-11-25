@@ -6,18 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class PubblicamanualeCommandTest extends WebTestCase
-{
+class PubblicamanualeCommandTest extends WebTestCase {
+
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
-    {
+    protected function setUp(): void {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
     }
-    public function testPubblicamanuale()
-    {
+
+    public function testPubblicamanuale() {
         $kernel = static::$kernel;
         $application = new Application($kernel);
 
@@ -34,4 +33,5 @@ class PubblicamanualeCommandTest extends WebTestCase
         $this->assertFileExists($apppath->getVarPath());
         unlink($filename);
     }
+
 }

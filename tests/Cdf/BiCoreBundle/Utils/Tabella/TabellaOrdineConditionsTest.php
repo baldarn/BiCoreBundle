@@ -7,8 +7,8 @@ use Cdf\BiCoreBundle\Utils\Tabella\ParametriTabella;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Cdf\BiCoreBundle\Utils\Tabella\DatetimeTabella;
 
-class TabellaOrdineConditionsTest extends KernelTestCase
-{
+class TabellaOrdineConditionsTest extends KernelTestCase {
+
     protected $doctrine;
     protected $templating;
     protected $bundle;
@@ -19,8 +19,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
     private $recordstabellaordine = 14;
     private $colonnetotaliordine = 25;
 
-    protected function setUp()
-    {
+    protected function setUp(): void {
         //$d = DatetimeTabella::createFromFormat("d/m/Y H:i:s", "05/02/1980 00:00:00", new \DateTimeZone('UTC'));
         //dump($d);exit;
         parent::setUp();
@@ -32,9 +31,9 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         //Parametri Tabella
         $this->bundle = 'App';
         $this->controller = 'Ordine';
-        $template = $this->bundle.':'.$this->controller.':.html.twig';
+        $template = $this->bundle . ':' . $this->controller . ':.html.twig';
         if (!$this->templating->exists($template)) {
-            $template = $this->controller.'/Crud/index.html.twig';
+            $template = $this->controller . '/Crud/index.html.twig';
         }
 
         $this->entityclassnotation = 'App:Ordine';
@@ -42,8 +41,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         $this->formclass = str_replace('Entity', 'Form', $this->entityclass);
     }
 
-    public function testTabellaOrdineIndex()
-    {
+    public function testTabellaOrdineIndex() {
         $elencotest = $this->elencoTests();
         foreach ($elencotest as $singolotest) {
             $idpassato = $singolotest['idpassato'];
@@ -63,8 +61,8 @@ class TabellaOrdineConditionsTest extends KernelTestCase
             $this->assertEquals($this->colonnetotaliordine, count($tabella->getConfigurazionecolonnetabella()));
             //Controllo coerenza modellocolonne con configurazione colonne tabella
             foreach ($tabella->getConfigurazionecolonnetabella() as $colonna) {
-                if (isset($modellocolonne[$colonna['nometabella'].'.'.$colonna['nomecampo']])) {
-                    $modellocolonna = $modellocolonne[$colonna['nometabella'].'.'.$colonna['nomecampo']];
+                if (isset($modellocolonne[$colonna['nometabella'] . '.' . $colonna['nomecampo']])) {
+                    $modellocolonna = $modellocolonne[$colonna['nometabella'] . '.' . $colonna['nomecampo']];
                     $this->assertEquals($colonna['etichetta'], $modellocolonna['etichetta']);
                     $this->assertEquals($colonna['escluso'], $modellocolonna['escluso']);
                     $this->assertEquals($colonna['larghezza'], $modellocolonna['larghezza']);
@@ -80,8 +78,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         }
     }
 
-    public function testTabellaOrdineIndexParametriMinimi()
-    {
+    public function testTabellaOrdineIndexParametriMinimi() {
         $permessi = ['read' => true, 'create' => true, 'delete' => true, 'update' => true];
 
         $parametritabella = $this->getParametriTabella($permessi);
@@ -91,8 +88,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         $this->assertEquals($this->recordstabellaordine, $tabella->getRighetotali());
     }
 
-    private function getParametriTabella($permessi = array(), $modellocolonne = array(), $colonneordinamento = array(), $prefiltri = array(), $filtri = array(), $idpassato = '', $user = null, $righeperpagina = 15)
-    {
+    private function getParametriTabella($permessi = array(), $modellocolonne = array(), $colonneordinamento = array(), $prefiltri = array(), $filtri = array(), $idpassato = '', $user = null, $righeperpagina = 15) {
         $useradmin = $this->doctrine->getManager()->getRepository('BiCoreBundle:Operatori')->findOneByUsername('admin');
         if (!$user) {
             $user = $useradmin;
@@ -107,10 +103,10 @@ class TabellaOrdineConditionsTest extends KernelTestCase
             'formclass' => ParametriTabella::setParameter($this->formclass),
             'modellocolonne' => ParametriTabella::setParameter(json_encode($modellocolonne)),
             'permessi' => ParametriTabella::setParameter(json_encode($permessi)),
-            'urltabella' => ParametriTabella::setParameter('/'.$this->controller.'/'.'Tabella'),
+            'urltabella' => ParametriTabella::setParameter('/' . $this->controller . '/' . 'Tabella'),
             'baseurl' => ParametriTabella::setParameter('/'),
             'idpassato' => ParametriTabella::setParameter($idpassato),
-            'titolotabella' => ParametriTabella::setParameter('Elenco '.$this->controller),
+            'titolotabella' => ParametriTabella::setParameter('Elenco ' . $this->controller),
             'paginacorrente' => ParametriTabella::setParameter('1'),
             'paginetotali' => ParametriTabella::setParameter(''),
             'righeperpagina' => ParametriTabella::setParameter($righeperpagina),
@@ -121,8 +117,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         );
     }
 
-    private function elencoTests()
-    {
+    private function elencoTests() {
         $useradmin = $this->doctrine->getManager()->getRepository('BiCoreBundle:Operatori')->findOneByUsername('admin');
         $usernoroles = $this->doctrine->getManager()->getRepository('BiCoreBundle:Operatori')->findOneByUsername('usernorole');
         $userreadroles = $this->doctrine->getManager()->getRepository('BiCoreBundle:Operatori')->findOneByUsername('userreadrole');
@@ -133,7 +128,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
             'idpassato' => '',
             'modellocolonne' => array(
             ),
-            'colonneordinamento' => array($this->controller.'.id' => 'ASC'),
+            'colonneordinamento' => array($this->controller . '.id' => 'ASC'),
             'filtri' => array(),
             'prefiltri' => array(),
             'permessi' => ['read' => true, 'create' => true, 'delete' => true, 'update' => true],
@@ -146,7 +141,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         $alltests[] = array(
             'idpassato' => '',
             'modellocolonne' => array(),
-            'colonneordinamento' => array($this->controller.'.id' => 'ASC'),
+            'colonneordinamento' => array($this->controller . '.id' => 'ASC'),
             'filtri' => array(),
             'prefiltri' => array(array('nomecampo' => 'Ordine.quantita',
                     'operatore' => '>',
@@ -163,7 +158,7 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         $alltests[] = array(
             'idpassato' => '',
             'modellocolonne' => array(),
-            'colonneordinamento' => array($this->controller.'.id' => 'ASC'),
+            'colonneordinamento' => array($this->controller . '.id' => 'ASC'),
             'filtri' => array(),
             'prefiltri' => array(array('nomecampo' => 'Ordine.Prodottofornitore.Fornitore.ragionesociale',
                     'operatore' => '=',
@@ -180,13 +175,13 @@ class TabellaOrdineConditionsTest extends KernelTestCase
         $alltests[] = array(
             'idpassato' => '',
             'modellocolonne' => array(),
-            'colonneordinamento' => array($this->controller.'.id' => 'ASC'),
+            'colonneordinamento' => array($this->controller . '.id' => 'ASC'),
             'filtri' => array(),
             'prefiltri' => array(
                 array('nomecampo' => 'Ordine.Prodottofornitore.quantitadisponibile',
                     'operatore' => '>=',
                     'valore' => 500,
-                ), ),
+                ),),
             'permessi' => ['read' => true, 'create' => true, 'delete' => true, 'update' => true],
             'righeperpagina' => 9,
             'righetotali' => 9,
@@ -196,4 +191,5 @@ class TabellaOrdineConditionsTest extends KernelTestCase
 
         return $alltests;
     }
+
 }

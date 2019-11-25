@@ -5,16 +5,13 @@ namespace Cdf\BiCoreBundle\Tests\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Cdf\BiCoreBundle\Tests\Utils\BiWebtestcaseAuthorizedClient;
 
-class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient
-{
+class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
-    public function setUp()
-    {
+    protected function setUp(): void {
         parent::setUp();
     }
 
-    public function testSecuredColonnetabelleIndex()
-    {
+    public function testSecuredColonnetabelleIndex() {
         $nomecontroller = 'Colonnetabelle';
         $client = $this->logInAdmin();
         $client->request('GET', '/' . $nomecontroller);
@@ -74,8 +71,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    public function testSecuredMenuapplicazioneIndex()
-    {
+    public function testSecuredMenuapplicazioneIndex() {
         $client = $this->logInAdmin();
         $nomecontroller = 'Menuapplicazione';
         $client->request('GET', '/' . $nomecontroller);
@@ -132,8 +128,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    public function testSecuredOperatoriIndex()
-    {
+    public function testSecuredOperatoriIndex() {
         $client = $this->logInAdmin();
         $nomecontroller = 'Operatori';
         $client->request('GET', '/' . $nomecontroller);
@@ -214,8 +209,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient
         $this->em->clear();
     }
 
-    public function testSecuredOpzionitabelleIndex()
-    {
+    public function testSecuredOpzionitabelleIndex() {
         $client = $this->logInAdmin();
         $nomecontroller = 'Opzionitabelle';
         $client->request('GET', '/' . $nomecontroller);
@@ -272,8 +266,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    public function testSecuredPermessiIndex()
-    {
+    public function testSecuredPermessiIndex() {
         $client = $this->logInAdmin();
         $nomecontroller = 'Permessi';
         $client->request('GET', '/' . $nomecontroller);
@@ -343,8 +336,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    public function testSecuredRuoliIndex()
-    {
+    public function testSecuredRuoliIndex() {
         $client = $this->logInAdmin();
         $nomecontroller = 'Ruoli';
         $client->request('GET', '/' . $nomecontroller);

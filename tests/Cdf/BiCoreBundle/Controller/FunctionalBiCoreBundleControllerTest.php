@@ -4,11 +4,9 @@ namespace Cdf\BiCoreBundle\Tests\Controller;
 
 use Cdf\BiCoreBundle\Tests\Utils\BiTestAuthorizedClient;
 
-class FunctionalBiCoreBundleControllerTest extends BiTestAuthorizedClient
-{
+class FunctionalBiCoreBundleControllerTest extends BiTestAuthorizedClient {
 
-    public function testBiCoreBundleIndex()
-    {
+    public function testBiCoreBundleIndex() {
         $colonnetabelleregistrati = 6;
         $htmltableid = 'tableColonnetabelle';
         $client = static::createPantherClient();
@@ -74,7 +72,7 @@ class FunctionalBiCoreBundleControllerTest extends BiTestAuthorizedClient
                     });
         });
         $this->assertSame($permessiregistrati, count($permessi));
-        
+
         $ruoliregistrati = 3;
         $htmltableid = 'tableRuoli';
         $testUrl = '/Ruoli/';
@@ -90,8 +88,7 @@ class FunctionalBiCoreBundleControllerTest extends BiTestAuthorizedClient
         //$this->logout();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void {
         static::createPantherClient()->quit();
         parent::tearDown();
     }

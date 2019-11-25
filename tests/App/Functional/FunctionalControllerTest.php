@@ -4,11 +4,9 @@ namespace App\Tests\Controller;
 
 use Cdf\BiCoreBundle\Tests\Utils\BiTestAuthorizedClient;
 
-class FunctionalControllerTest extends BiTestAuthorizedClient
-{
+class FunctionalControllerTest extends BiTestAuthorizedClient {
 
-    public function testFunctionalClienteIndex()
-    {
+    public function testFunctionalClienteIndex() {
         $clientiregistrati = 15;
         $htmltableid = 'tableCliente';
         $client = static::createPantherClient();
@@ -88,8 +86,7 @@ class FunctionalControllerTest extends BiTestAuthorizedClient
         $this->logout();
     }
 
-    public function testFunctionalFornitoreIndex()
-    {
+    public function testFunctionalFornitoreIndex() {
         $fornitoriregistrati = 3;
         $htmltableid = 'tableFornitore';
         $client = static::createPantherClient();
@@ -106,8 +103,7 @@ class FunctionalControllerTest extends BiTestAuthorizedClient
         $this->logout();
     }
 
-    public function testSecuredFunctionalMagazzinoIndex()
-    {
+    public function testSecuredFunctionalMagazzinoIndex() {
         $url = $this->getRoute('Magazzino_container');
         $client = static::createPantherClient();
 
@@ -133,8 +129,7 @@ class FunctionalControllerTest extends BiTestAuthorizedClient
         $this->logout();
     }
 
-    public function testFunctionalOrdineIndex()
-    {
+    public function testFunctionalOrdineIndex() {
         $ordiniregistrati = 14;
         $htmltableid = 'tableOrdine';
         $client = static::createPantherClient();
@@ -151,8 +146,7 @@ class FunctionalControllerTest extends BiTestAuthorizedClient
         $this->logout();
     }
 
-    public function testFunctionalOrdineEditinline()
-    {
+    public function testFunctionalOrdineEditinline() {
         $clientiregistrati = 15;
         $htmltableid = 'tableOrdine';
         $client = static::createPantherClient();
@@ -219,8 +213,7 @@ class FunctionalControllerTest extends BiTestAuthorizedClient
         $this->logout();
     }
 
-    public function testFunctionalProdottofornitoreIndex()
-    {
+    public function testFunctionalProdottofornitoreIndex() {
         $prodottifornitoreregistrati = 11;
         $htmltableid = 'tableProdottofornitore';
         $client = static::createPantherClient();
@@ -235,11 +228,9 @@ class FunctionalControllerTest extends BiTestAuthorizedClient
         });
         $this->assertSame($prodottifornitoreregistrati, count($prodottifornitore));
         $this->logout();
-
     }
-    
-    public function tearDown()
-    {
+
+    public function tearDown(): void {
         static::createPantherClient()->quit();
         parent::tearDown();
     }
