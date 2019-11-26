@@ -22,7 +22,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
         $client->request('POST', '/Colonnetabelle/tabella', array('parametri' => $parametri));
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Pagina 1 di 1 (Righe estratte: 6)',
                 $client->getResponse()->getContent()
         );
@@ -30,7 +30,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         //New
         $crawler = $client->request('GET', '/Colonnetabelle/new');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-//        $this->assertContains(
+//        $this->assertStringContainsString(
 //                'Utente', $client->getResponse()->getContent()
 //        );
         $provacolonnatabella = 'Provacolonnatabella';
@@ -39,7 +39,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $form = $crawler->filter('form[id=formdatiColonnetabelle]')->form(array("$camporuolo" => $provacolonnatabella));
         // submit that form
         $crawler = $client->submit($form);
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provacolonnatabella',
                 $client->getResponse()->getContent()
         );
@@ -59,7 +59,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $crawler = $client->submit($form);
         $crawler = $client->request('GET', '/Colonnetabelle/' . $colonnatabellainserito->getId() . '/edit');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provacolonnatabella2',
                 $client->getResponse()->getContent()
         );
@@ -82,14 +82,14 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
         $client->request('POST', '/Menuapplicazione/tabella', array('parametri' => $parametri));
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Pagina 1 di 2 (Righe estratte: 16)', $client->getResponse()->getContent()
         );
 
         //New
         $crawler = $client->request('GET', '/Menuapplicazione/new');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-//        $this->assertContains(
+//        $this->assertStringContainsString(
 //                'Utente', $client->getResponse()->getContent()
 //        );
         $provamenuapplicazione = 'Provamenuapplicazione';
@@ -98,7 +98,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $form = $crawler->filter('form[id=formdatiMenuapplicazione]')->form(array("$camporuolo" => $provamenuapplicazione));
         // submit that form
         $crawler = $client->submit($form);
-        $this->assertContains(
+        $this->assertStringContainsString(
                 $provamenuapplicazione, $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -117,7 +117,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $crawler = $client->submit($form);
         $crawler = $client->request('GET', '/Menuapplicazione/' . $menuapplicazioneinserito->getId() . '/edit');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provamenuapplicazione2', $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -139,7 +139,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
         $client->request('POST', '/Operatori/tabella', array('parametri' => $parametri));
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Pagina 1 di 1 (Righe estratte: 3)', $client->getResponse()->getContent()
         );
 
@@ -156,7 +156,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         //New
         $crawler = $client->request('GET', '/Operatori/new');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-//        $this->assertContains(
+//        $this->assertStringContainsString(
 //                'Utente', $client->getResponse()->getContent()
 //        );
         $provaooperatori = 'testoperatore';
@@ -175,7 +175,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         );
         // submit that form
         $crawler = $client->submit($form);
-        $this->assertContains(
+        $this->assertStringContainsString(
                 $provaooperatori, $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -194,7 +194,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $crawler = $client->submit($form);
         $crawler = $client->request('GET', '/Operatori/' . $operatoriinserito->getId() . '/edit');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provaoperatori2', $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -220,14 +220,14 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
         $client->request('POST', '/Opzionitabelle/tabella', array('parametri' => $parametri));
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Pagina 1 di 1 (Righe estratte: 3)', $client->getResponse()->getContent()
         );
 
         //New
         $crawler = $client->request('GET', '/Opzionitabelle/new');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-//        $this->assertContains(
+//        $this->assertStringContainsString(
 //                'Utente', $client->getResponse()->getContent()
 //        );
         $provaopzionitabelle = 'testopzionitabelle';
@@ -236,7 +236,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $form = $crawler->filter('form[id=formdatiOpzionitabelle]')->form(array("$camporuolo" => $provaopzionitabelle));
         // submit that form
         $crawler = $client->submit($form);
-        $this->assertContains(
+        $this->assertStringContainsString(
                 $provaopzionitabelle, $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -255,7 +255,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $crawler = $client->submit($form);
         $crawler = $client->request('GET', '/Opzionitabelle/' . $opzionitabelleinserito->getId() . '/edit');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provaopzionitabella2', $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -277,7 +277,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
         $client->request('POST', '/Permessi/tabella', array('parametri' => $parametri));
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Pagina 1 di 1 (Righe estratte: 1)',
                 $client->getResponse()->getContent()
         );
@@ -295,7 +295,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         //New
         $crawler = $client->request('GET', '/Permessi/new');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-//        $this->assertContains(
+//        $this->assertStringContainsString(
 //                'Utente', $client->getResponse()->getContent()
 //        );
         $provaopermessi = 'testpermessi';
@@ -304,7 +304,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $form = $crawler->filter('form[id=formdatiPermessi]')->form(array("$camporuolo" => $provaopermessi));
         // submit that form
         $crawler = $client->submit($form);
-        $this->assertContains(
+        $this->assertStringContainsString(
                 $provaopermessi,
                 $client->getResponse()->getContent()
         );
@@ -324,7 +324,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $crawler = $client->submit($form);
         $crawler = $client->request('GET', '/Permessi/' . $permessiinserito->getId() . '/edit');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provapermessi2',
                 $client->getResponse()->getContent()
         );
@@ -347,14 +347,14 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
 
         $client->request('POST', '/Ruoli/tabella', array('parametri' => $parametri));
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Pagina 1 di 1 (Righe estratte: 3)', $client->getResponse()->getContent()
         );
 
         //New
         $crawler = $client->request('GET', '/Ruoli/new');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-//        $this->assertContains(
+//        $this->assertStringContainsString(
 //                'Utente', $client->getResponse()->getContent()
 //        );
         $provaruolo = 'Provaruolo';
@@ -363,7 +363,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $form = $crawler->filter('form[id=formdatiRuoli]')->form(array("$camporuolo" => $provaruolo));
         // submit that form
         $crawler = $client->submit($form);
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provaruolo', $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -382,7 +382,7 @@ class BiCoreBundleControllerTest extends BiWebtestcaseAuthorizedClient {
         $crawler = $client->submit($form);
         $crawler = $client->request('GET', '/Ruoli/' . $ruoloinserito->getId() . '/edit');
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
                 'Provaruolo2', $client->getResponse()->getContent()
         );
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
