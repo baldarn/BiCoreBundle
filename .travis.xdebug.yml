@@ -21,32 +21,49 @@ matrix:
     fast_finish: true
     include:
         - php: 7.2
-          env: DB=mysql SYMFONY=5.0
+          env: DB=mysql SYMFONY=4.4 XDEBUG=0
         - php: 7.2
-          env: DB=pgsql SYMFONY=5.0
+          env: DB=mysql SYMFONY=4.4 XDEBUG=1
         - php: 7.2
-          env: DB=sqlite3 SYMFONY=5.0
+          env: DB=pgsql SYMFONY=4.4 XDEBUG=0
+        - php: 7.2
+          env: DB=pgsql SYMFONY=4.4 XDEBUG=1
+        - php: 7.2
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=0
+        - php: 7.2
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=1
         - php: 7.3
-          env: DB=mysql SYMFONY=5.0
+          env: DB=mysql SYMFONY=4.4 XDEBUG=0
         - php: 7.3
-          env: DB=pgsql SYMFONY=5.0
+          env: DB=mysql SYMFONY=4.4 XDEBUG=1
         - php: 7.3
-          env: DB=sqlite3 SYMFONY=5.0
+          env: DB=pgsql SYMFONY=4.4 XDEBUG=0
+        - php: 7.3
+          env: DB=pgsql SYMFONY=4.4 XDEBUG=1
+        - php: 7.3
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=0
+        - php: 7.3
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=1
           
     allow_failures:
         #Sqlite fails on comparision date (equals)
-        #- php: 7.2
-        #  env: DB=mysql SYMFONY=5.0
-        #- php: 7.2
-        #  env: DB=pgsql SYMFONY=5.0
-        #- php: 7.2
-        #  env: DB=sqlite3 SYMFONY=5.0
-        #- php: 7.3
-        #  env: DB=mysql SYMFONY=5.0
-        #- php: 7.3
-        #  env: DB=pgsql SYMFONY=5.0
-        #- php: 7.3
-        #  env: DB=sqlite3 SYMFONY=5.0
+        - php: 7.2
+          env: DB=mysql SYMFONY=4.4 XDEBUG=1
+        - php: 7.3
+          env: DB=mysql SYMFONY=4.4 XDEBUG=1
+        - php: 7.2
+          env: DB=pgsql SYMFONY=4.4 XDEBUG=1
+        - php: 7.3
+          env: DB=pgsql SYMFONY=4.4 XDEBUG=1
+        - php: 7.2
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=0
+        - php: 7.2
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=1
+        - php: 7.3
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=0
+        - php: 7.3
+          env: DB=sqlite3 SYMFONY=4.4 XDEBUG=1
+
     exclude:
     #- php: hhvm
     #  env: DB=pgsql
@@ -106,7 +123,6 @@ before_script:
   - if [[ "$DB" == "sqlite3" ]]; then echo "PROVISIONING WITH Sqlite3"; fi
   - if [[ "$DB" == "sqlite3" ]]; then cp -f ./tests/build/.env.sqlite $TRAVIS_BUILD_DIR/tests/.env; fi
   
-
   #- if [[ $SYMFONY == "5.0" ]]; then sed -i -e "s,4.4.\*,5.0.\*,g" $TRAVIS_BUILD_DIR/composer.json; fi
   #- if [[ $SYMFONY == "5.0" ]]; then sed -i '\|"sensio\/distribution-bundle"|d' $TRAVIS_BUILD_DIR/composer.json; fi
   #- if [[ $SYMFONY == "5.0" ]]; then sed -i '\"SensioDistributionBundle"d' $TRAVIS_BUILD_DIR/tests/config/bundles.php; fi
@@ -120,12 +136,9 @@ script:
   #- PANTHER_WEB_SERVER_DIR=/src/php/BiCoreBundle/tests/public PANTHER_NO_HEADLESS=1 vendor/bin/simple-phpunit -c tools/phpunit/phpunit.xml.dist --filter test20AdminpanelGenerateBundle
 
 after_success:
-  - php vendor/bin/php-coveralls -v
-  - wget https://scrutinizer-ci.com/ocular.phar -t 3
-  - php ocular.phar code-coverage:upload --format=php-clover build/artifacts/coverage/clover.xml
-  #- if [[ "$XDEBUG" == "1" ]]; then php vendor/bin/php-coveralls -v; fi
-  #- if [[ "$XDEBUG" == "1" ]]; then wget https://scrutinizer-ci.com/ocular.phar -t 3; fi
-  #- if [[ "$XDEBUG" == "1" ]]; then php ocular.phar code-coverage:upload --format=php-clover build/artifacts/coverage/clover.xml; fi
+  - if [[ "$XDEBUG" == "1" ]]; then php vendor/bin/php-coveralls -v; fi
+  - if [[ "$XDEBUG" == "1" ]]; then wget https://scrutinizer-ci.com/ocular.phar -t 3; fi
+  - if [[ "$XDEBUG" == "1" ]]; then php ocular.phar code-coverage:upload --format=php-clover build/artifacts/coverage/clover.xml; fi
   - rm tests/var/cache/dbtest.sqlite
   #- php tests/bin/console server:stop --env=test
   #- kill `ps -ef | grep selenium | awk '{ print $2 }'`
