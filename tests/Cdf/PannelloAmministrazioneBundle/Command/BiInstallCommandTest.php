@@ -26,7 +26,7 @@ class BiInstallCommandTest extends WebTestCase {
         $outputdroptables = $commandTesterdroptables->getDisplay();
 
         $this->assertRegExp('/.../', $outputdroptables);
-        //$this->assertContains('Cosa cercare', $outputimport);
+        //$this->assertStringContainsString('Cosa cercare', $outputimport);
 
         $commanddropdatabase = $application->find('bicorebundle:dropdatabase');
         $commandTesterdropdatabase = new CommandTester($commanddropdatabase);
@@ -34,7 +34,7 @@ class BiInstallCommandTest extends WebTestCase {
         $outputdropdatabase = $commandTesterdropdatabase->getDisplay();
 
         $this->assertRegExp('/.../', $outputdropdatabase);
-        //$this->assertContains('Cosa cercare', $outputdropdatabase);
+        //$this->assertStringContainsString('Cosa cercare', $outputdropdatabase);
 
         $commandinstall = $application->find('bicorebundle:install');
         $commandTesterinstall = new CommandTester($commandinstall);
@@ -43,14 +43,14 @@ class BiInstallCommandTest extends WebTestCase {
 
         $this->assertRegExp('/.../', $outputinstall);
 
-        //$this->assertContains('Cosa cercare', $outputimport);
+        //$this->assertStringContainsString('Cosa cercare', $outputimport);
         $commandloaddata = $application->find('bicoredemo:loaddefauldata');
         $commandTesterLoaddata = new CommandTester($commandloaddata);
         $commandTesterLoaddata->execute(array());
         $outputloaddata = $commandTesterLoaddata->getDisplay();
 
         $this->assertRegExp('/.../', $outputloaddata);
-        $this->assertContains('Done', $outputloaddata);
+        $this->assertStringContainsString('Done', $outputloaddata);
 
         /*
           $commandcc = $application->find('cache:clear');
